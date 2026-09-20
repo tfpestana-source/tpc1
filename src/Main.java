@@ -14,6 +14,7 @@ public class Main {
     public static final String SET_EMAIL      = "SE";
     public static final String LIST_CONTACTS  = "LC";
     public static final String SAME_NUMBERS   = "EP";
+    public static final String GET_NUMBER     = "GN";
     public static final String QUIT           = "Q";
 
 
@@ -28,6 +29,9 @@ public class Main {
     public static final String NO_REPEATED_NUMBERS = "All contacts have different phone numbers.";
     public static final String QUIT_MSG = "Goodbye!";
     public static final String COMMAND_ERROR = "Unknown command.";
+    public static final String PHONE_DOES_NOT_EXIST = "Phone number does not exist.";
+
+
 
 
     public static void main(String[] args) {
@@ -60,7 +64,10 @@ public class Main {
                     break;
                 case SAME_NUMBERS:
                     checkRepeatedNumbers(cBook);
-
+                    break;
+                case GET_NUMBER:
+                    getContactThroughNumber(in, cBook);
+                    break;
                 default:
                     System.out.println(COMMAND_ERROR);
             }
@@ -159,6 +166,11 @@ public class Main {
     }
 
     private static void checkRepeatedNumbers(ContactBook cBook) {
+        if (cBook.hasRepeatedNumbers()) {
+            System.out.println(HAS_REPEATED_NUMBERS);
+        }
+        else System.out.println(NO_REPEATED_NUMBERS);
+    }
 
     private static void getContactThroughNumber(Scanner in, ContactBook cBook) {
         int number = in.nextInt();in.nextLine();
