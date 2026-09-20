@@ -29,6 +29,7 @@ public class Main {
     public static final String QUIT_MSG = "Goodbye!";
     public static final String COMMAND_ERROR = "Unknown command.";
 
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         ContactBook cBook = new ContactBook();
@@ -59,6 +60,7 @@ public class Main {
                     break;
                 case SAME_NUMBERS:
                     checkRepeatedNumbers(cBook);
+
                 default:
                     System.out.println(COMMAND_ERROR);
             }
@@ -69,6 +71,8 @@ public class Main {
         System.out.println();
         in.close();
     }
+
+
 
     private static String getCommand(Scanner in) {
         String input;
@@ -156,5 +160,21 @@ public class Main {
 
     private static void checkRepeatedNumbers(ContactBook cBook) {
 
+    private static void getContactThroughNumber(Scanner in, ContactBook cBook) {
+        int number = in.nextInt();in.nextLine();
+
+        String name = "";
+        if (cBook.getNumberOfContacts() != 0) {
+            cBook.initializeIterator();
+            while( cBook.hasNext() && name.isEmpty()) {
+                Contact c = cBook.next();
+                if (number == c.getPhone())
+                    name = c.getName();
+            }
+        }
+        if (!name.isEmpty()) {
+            System.out.println(name);
+        }
+        else System.out.println(PHONE_DOES_NOT_EXIST);
     }
 }
